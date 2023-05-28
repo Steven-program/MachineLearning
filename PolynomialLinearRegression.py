@@ -30,10 +30,14 @@ def compute_gradient(x, y, w, b, alpha, iterations):
     return w, b
 
 
-x = np.arange(0, 20, 1)
-y = 1 + x ** 2
-X = x ** 2
-X = X.reshape(-1, 1)
-# print(X)
+x = np.arange(0,20,1)
+y = np.cos(x/2)
+X = np.c_[x, x**2, x**3, x**4, x**5, x**6, x**7, x**8, x**9, x**10, x**11, x**12, x**13]
+
+# feature scaling to improve time and cut alpha level
+mu = np.mean(X, axis=0)
+sigma = np.std(X, axis=0)
+X_norm = (X - mu) / sigma
+
 w_values = np.zeros(len(X[0]))
-print(compute_gradient(X, y, w_values, b=0, iterations=40000, alpha=1e-5))
+print(compute_gradient(X_norm, y, w_values, b=0, iterations=1000000, alpha=1e-1))

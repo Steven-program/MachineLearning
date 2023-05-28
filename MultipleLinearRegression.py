@@ -8,6 +8,9 @@ def compute_derivative(x, y, w, b):
     # m = rows, n = columns
     for i in range(m):
         diff = np.dot(x[i], w) + b - y[i]
+
+        # remember that a dot product is used so that the effect of multiple variables on the predicted value can be
+        # readily observed
         for j in range(n):
             dw[j] += (diff * x[i, j])
         db += diff
