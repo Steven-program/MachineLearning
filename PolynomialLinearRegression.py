@@ -2,8 +2,7 @@ import numpy as np
 
 np.set_printoptions(precision=2)
 
-
-def compute_derivative(x, y, w, b):
+def compute_derivative(x, y, w, b, lambd =1):
     dw = np.zeros(len(w))
     db = 0
     m, n = x.shape
@@ -15,7 +14,12 @@ def compute_derivative(x, y, w, b):
         db += diff
 
     dw *= 1 / m
-    db *= 1 / n
+    db *= 1 / m
+
+
+    # this code segment regularizes the linear regression to avoid overfitting
+    for j in range(n):
+        dw[j] += lambd/m * w[j]
 
     return dw, db
 
@@ -30,9 +34,9 @@ def compute_gradient(x, y, w, b, alpha, iterations):
     return w, b
 
 
-x = np.arange(0,20,1)
-y = np.cos(x/2)
-X = np.c_[x, x**2, x**3, x**4, x**5, x**6, x**7, x**8, x**9, x**10, x**11, x**12, x**13]
+x = np.arange(0, 20, 1)
+y = np.cos(x / 2)
+X = np.c_[x, x ** 2, x ** 3, x ** 4, x ** 5, x ** 6, x ** 7, x ** 8, x ** 9, x ** 10, x ** 11, x ** 12, x ** 13]
 
 # feature scaling to improve time and cut alpha level
 mu = np.mean(X, axis=0)

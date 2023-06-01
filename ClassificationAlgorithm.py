@@ -7,10 +7,10 @@ def sigmoid(num):
     return 1 / (1 + np.exp(-num))
 
 
-def calculate_DLoss(x, y, w, b):
+def calculate_DLoss(x, y, w, b, lambd = 1):
     m, n = x.shape
     dw = np.zeros(len(w))
-    db = 0
+    db = 0.0
 
     for i in range(m):
         z = sigmoid(np.dot(w, x[i]) + b)
@@ -21,6 +21,9 @@ def calculate_DLoss(x, y, w, b):
 
     dw /= m
     db /= m
+
+    for j in range(n):
+        dw[j] += lambd/m * w[j]
     return dw, db
 
 
