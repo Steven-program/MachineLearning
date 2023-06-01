@@ -16,7 +16,7 @@ def compute_derivative(x, y, w, b):
         db += diff
 
     dw *= 1 / m
-    db *= 1 / n
+    db *= 1 / m
 
     return dw, db
 
@@ -49,7 +49,7 @@ print(w, b)
 # then that means that your alpha level is too small or too big
 
 # when the training data is normalized, further training data must also be normalized. Example:
-x_house = np.array([1200, 3, 1, 40])
+x_house = np.array([2253, 3, 1, 9])
 mu = np.mean(x_house)
 sigma = np.std(x_house)
 x_house = (x_house - mu)/sigma
